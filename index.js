@@ -13,29 +13,32 @@ http.createServer(app).listen(3333, ()=>{
 app.use(compression());
 app.use(helmet());
 
+const data = {
+    length:2,
+    quotes: [
+        { name:`Nike`,text:`Just Do it`},
+        { name:`McDonalds`,text:`I'm lovin' it`},
+    ]
+};
 
 
-/* Routes */
-
-app.get(`/`, (request, response) => {
-    const route = request.route.path;
-    const name = request.query.n || `World`;
+/*Controllers */
+const getRootResponse = (req,res) => {
+    const route = req.route.path;
+    const name = req.query.n || `World`;
     const snippet = `
         <div>
             <h1>Hello ${name}!</h1>
             <p>Get request at <strong>${route}</strong>
         </div>`;
+    res.status(200).send(snippet).end();
+};
 
-    response.status(200).send(snippet).end();
-});
+
+/* Routes */
+
+app.get(`/`, getRootResponse);
 
 app.get(`/json`, (request, response) => {
-    const data = {
-        length:2,
-        quotes: [
-            { name:`Nike`,text:`Just Do it`},
-            { name:`McDonalds`,text:`I'm lovin' it`},
-        ]
-    };
     response.status(200).send(JSON.stringify(data)).end();
 });
