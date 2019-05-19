@@ -38,6 +38,24 @@ const getRootResponse = (req,res) => {
 
 app.get(`/`, getRootResponse);
 
-app.get(`/json`, (request, response) => {
-    response.status(200).send(JSON.stringify(data)).end();
+app.get(`/all`, (request, response) => {
+    let json = {
+        len: data.length,
+        data: data
+    };
+    json=JSON.stringify(json);
+    response.status(200).send(json).end();
+});
+
+app.get(`/add`, (req, res) => {
+
+    const name = req.query.n || null;
+    const slogan = req.query.s || null;
+
+    if (!name || !slogan) {
+        res.status(500).send({"result":"Name or slogan not supplied"}).end();
+    }
+    data.push({name,slogan});
+    res.status(200).send({"result":"Added successfully"}).end();
+
 });
