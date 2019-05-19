@@ -1,10 +1,9 @@
-const http = require(`http`);
 const express = require(`express`);
 const app = express();
 const compression = require('compression');
 const helmet = require('helmet');
 
-http.createServer(app).listen(3333, ()=>{
+app.listen(3333, ()=> {
     console.log(`Server is running at http://localhost:3333`);
 });
 
