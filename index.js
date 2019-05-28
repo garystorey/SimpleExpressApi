@@ -41,21 +41,19 @@ app.get(`/`, getRootResponse);
 app.get(`/all`, (request, response) => {
     let json = {
         len: data.length,
-        data: data
+        data
     };
-    json=JSON.stringify(json);
     response.status(200).send(json).end();
 });
 
 app.get(`/add`, (req, res) => {
 
-    const name = req.query.n || null;
-    const slogan = req.query.s || null;
+    const {n:name,s:slogan} = req.query;
 
     if (!name || !slogan) {
-        res.status(500).send({"result":"Name or slogan not supplied"}).end();
+        res.status(500).send({result:"Name or slogan not supplied"}).end();
     }
     data.push({name,slogan});
-    res.status(200).send({"result":"Added successfully"}).end();
+    res.status(200).send({result:"Added successfully"}).end();
 
 });
