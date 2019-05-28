@@ -15,8 +15,8 @@ app.use(helmet());
 const data = {
     length:2,
     quotes: [
-        { name:`Nike`,text:`Just Do it`},
-        { name:`McDonalds`,text:`I'm lovin' it`},
+        { name:`Nike`,slogan:`Just Do it`},
+        { name:`McDonalds`,slogan:`I'm lovin' it`},
     ]
 };
 
